@@ -1,0 +1,28 @@
+namespace com.github.christravis.java;
+
+use com.github.christravis::TestData;
+
+composite JavaTestPartitionColocation {
+graph
+
+	stream<TestData> Data = FileSource ()
+	{
+		param
+			file: "data.csv";
+			format: csv;
+			hasHeaderLine: true;
+	}
+
+	stream<Data> CachedData = SendDataAsTuples (Data)
+	{
+		config
+			placement: partitionColocation("java-fuse");
+	}
+
+	() as ThroughputCheck = ReceiveDataAsTuples (CachedData)
+	{
+		config
+			placement: partitionColocation("java-fuse");
+	}
+
+}
