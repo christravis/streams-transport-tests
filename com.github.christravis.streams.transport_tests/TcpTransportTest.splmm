@@ -1,4 +1,4 @@
-namespace com.github.christravis;
+namespace com.github.christravis.streams.transport_tests;
 
 composite TcpTransportTest {
 graph

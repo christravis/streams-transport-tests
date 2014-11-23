@@ -1,4 +1,4 @@
-package com.github.christravis.java;
+package com.github.christravis.streams.transport_tests.java;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import com.ibm.streams.operator.model.OutputPortSet.WindowPunctuationOutputMode;
 import com.ibm.streams.operator.model.OutputPorts;
 import com.ibm.streams.operator.model.PrimitiveOperator;
 
-@PrimitiveOperator(name="SendDataAsTuples", namespace="com.github.christravis.java", description="Java Operator SendDataAsTuples")
+@PrimitiveOperator(name="SendDataAsTuples", namespace="com.github.christravis.streams.transport_tests.java", description="Java Operator SendDataAsTuples")
 @InputPorts({@InputPortSet(description="Port that ingests tuples", cardinality=1, optional=false, windowingMode=WindowMode.NonWindowed, windowPunctuationInputMode=WindowPunctuationInputMode.Oblivious), @InputPortSet(description="Optional input ports", optional=true, windowingMode=WindowMode.NonWindowed, windowPunctuationInputMode=WindowPunctuationInputMode.Oblivious)})
 @OutputPorts({@OutputPortSet(description="Port that produces tuples", cardinality=1, optional=false, windowPunctuationOutputMode=WindowPunctuationOutputMode.Generating), @OutputPortSet(description="Optional output ports", optional=true, windowPunctuationOutputMode=WindowPunctuationOutputMode.Generating)})
 public class SendDataAsTuples extends AbstractOperator

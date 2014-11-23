@@ -1,6 +1,6 @@
-namespace com.github.christravis.java;
+namespace com.github.christravis.streams.transport_tests.java;
 
-use com.github.christravis::TestData;
+use com.github.christravis.streams.transport_tests::TestData;
 
 composite JavaTestPartitionColocation {
 graph

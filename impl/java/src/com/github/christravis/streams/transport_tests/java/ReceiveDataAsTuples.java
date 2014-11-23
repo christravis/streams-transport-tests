@@ -1,4 +1,4 @@
-package com.github.christravis.java;
+package com.github.christravis.streams.transport_tests.java;
 
 import org.apache.log4j.Logger;
 
@@ -13,7 +13,7 @@ import com.ibm.streams.operator.model.InputPortSet.WindowPunctuationInputMode;
 import com.ibm.streams.operator.model.InputPorts;
 import com.ibm.streams.operator.model.PrimitiveOperator;
 
-@PrimitiveOperator(name="ReceiveDataAsTuples", namespace="com.github.christravis.java", description="Java Operator ReceiveDataAsTuples")
+@PrimitiveOperator(name="ReceiveDataAsTuples", namespace="com.github.christravis.streams.transport_tests.java", description="Java Operator ReceiveDataAsTuples")
 @InputPorts({@InputPortSet(description="Port that ingests tuples", cardinality=1, optional=false, windowingMode=WindowMode.NonWindowed, windowPunctuationInputMode=WindowPunctuationInputMode.Oblivious), @InputPortSet(description="Optional input ports", optional=true, windowingMode=WindowMode.NonWindowed, windowPunctuationInputMode=WindowPunctuationInputMode.Oblivious)})
 public class ReceiveDataAsTuples extends AbstractOperator
 {
