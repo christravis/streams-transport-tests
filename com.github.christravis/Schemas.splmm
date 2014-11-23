@@ -1,0 +1,16 @@
+namespace com.github.christravis;
+
+type TestData =
+	uint32 id,
+	rstring first_name,
+	rstring last_name,
+	rstring job_title,
+	rstring email,
+	rstring country,
+	rstring ip_address,
+	rstring website,
+	float64 salary,
+	rstring username,
+	rstring password,
+	rstring bio,
+	boolean admin;

@@ -1,0 +1,51 @@
+namespace com.github.christravis;
+
+composite IngestAndCacheTestData (output CachedData) {
+param
+	expression<boolean> $debug : false;
+graph
+
+	stream<TestData> Data = FileSource ()
+	{
+		param
+			file: "data.csv";
+			format: csv;
+			hasHeaderLine: true;
+	}
+
+	stream<Data> CachedData = Custom (Data)
+	{
+		logic
+			state: {
+				mutable list<Data> _cache;
+			}
+			onTuple Data: {
+				if ($debug && size(_cache) == 0) {
+					appLog(Log.error, "Started caching at: " + (rstring)getTimestampInSecs());
+				}
+
+				appendM(_cache, Data);
+			}
+			onPunct Data: {
+				if ($debug) {
+					appLog(Log.error, "Finished caching, started flushing " + (rstring)size(_cache) + " records at: " + (rstring)getTimestampInSecs());
+				}
+
+				// Keep on outputting data, as fast as we can, until the PE shutsdown!
+				while (!isShutdown()) {
+					for (Data data in _cache) {
+						submit(data, CachedData);
+					}
+
+					if ($debug) {
+						appLog(Log.error, "Finished flushing at: " + (rstring)getTimestampInSecs());
+					}
+				}
+
+				clearM(_cache);
+			}
+	}
+
+config
+	placement: partitionColocation("IngestAndCache");
+}

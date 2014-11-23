@@ -1,0 +1,11 @@
+namespace com.github.christravis;
+
+composite TcpTransportTest {
+graph
+
+	() as Test = streamstransporttests () {}
+
+config
+	inputTransport: TCP;
+	outputTransport: TCP;
+}

@@ -1,0 +1,27 @@
+namespace com.github.christravis;
+
+composite streamstransporttests {
+graph
+
+	stream <TestData> Data = IngestAndCacheTestData ()
+	{
+	}
+
+	() as MeasureThroughput = Custom (Data)
+	{
+		logic
+			state: {
+				mutable uint64 _count = 0ul;
+				uint64 _threshold = 1000000ul;
+			}
+			onTuple Data: {
+				_count++;
+
+				if (_count >= _threshold) {
+					appLog(Log.error, "Got " + (rstring)_threshold + " records at " + (rstring)getTimestampInSecs());
+					_count = 0ul;
+				}
+			}
+	}
+
+}

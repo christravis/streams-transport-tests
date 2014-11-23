@@ -1,0 +1,11 @@
+namespace com.github.christravis;
+
+composite LlmTcpTransportTest {
+graph
+
+	() as Test = streamstransporttests () {}
+
+config
+	inputTransport: LLM_RUM_TCP;
+	outputTransport: LLM_RUM_TCP;
+}
